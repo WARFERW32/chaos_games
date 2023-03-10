@@ -13,6 +13,7 @@ let canNot = true
 let flag = true
 
 pointOff.addEventListener('click', () => {
+    pointOff.style.background = 'rgb(233, 160, 24)'
     canNot = false;
     inStPo = 0
     container.addEventListener('mousedown', (e) => {
@@ -70,5 +71,6 @@ btn.addEventListener('click', () => {
     pointOff.style.display = 'inline-block'
     canNot = true
     box.removeChild(btnStart)
+    pointOff.style.background = ''
 })
 
