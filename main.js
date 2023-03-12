@@ -42,12 +42,9 @@ pointOff.addEventListener('click', () => {
         startPoint.style.left = `${x}px`;
         startPoint.style.top =  `${y}px`;
         inStPo++
-        
-        // box.appendChild(btnStart);
-        // btnStart.classList.add('btnStyle')
-        // btnStart.textContent = "Start"
         tabXpiont.push(x);
         tabYpoint.push(y);
+        console.log(x, y);
         
         
     })
@@ -81,21 +78,21 @@ container.addEventListener('mousedown', (e) => {
     index++ 
     tabX.push(x);
     tabY.push(y);
-    
- 
+    console.log(x, y);
 })
 start.addEventListener("click", () => {
     let a = tabX[index-1];
     let b = tabY[index-1];
     let c = tabXpiont[index-1];
-    let d = tabYpoint[index-1];
-
-    console.log(a, b);
-        
-    const dis = Math.sqrt( a*c + b*d );
-    console.log(dis);
-    console.log(dis/2);
-
+    let d = tabYpoint[index-1];  
+    const disX = (a+c)/2;
+    const disY = (b+d)/2;
+    const divCen = document.createElement('div');
+    container.appendChild(divCen);
+    divCen.classList.add('point');
+    divCen.style.left = `${disX}px`;
+    divCen.style.top = `${disY}px`;
+    console.log(disX, disY);
 })
 
 btn.addEventListener('click', () => {
