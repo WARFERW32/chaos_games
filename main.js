@@ -4,6 +4,11 @@ const pointOff = document.querySelector('.point-off');
 const btn = document.querySelector('.btn');
 const start = document.querySelector('.start');
 const btnStart = document.createElement('button');
+const btnStop = document.querySelector('.stop');
+// const div = document.querySelector('.point');
+
+
+
 
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 let index = 0;
@@ -11,15 +16,22 @@ let idname = 1;
 let inStPo = 0;
 let canNot = true   
 let flag = true
+let tabX = [];
+let tabY = [];
+let tabXpiont = [];
+let tabYpoint = [];
+let items = [];
 
 pointOff.addEventListener('click', () => {
     pointOff.style.background = 'rgb(233, 160, 24)'
     canNot = false;
     inStPo = 0
     container.addEventListener('mousedown', (e) => {
+        
         const x = e.offsetX
         const y = e.offsetY
         
+        start.style.display = 'inline-block'
         if(inStPo >= 1) return;
         pointOff.style.display = 'none'
         const startPoint = document.createElement('div');
@@ -31,21 +43,29 @@ pointOff.addEventListener('click', () => {
         startPoint.style.top =  `${y}px`;
         inStPo++
         
-        box.appendChild(btnStart);
-        btnStart.classList.add('btnStyle')
-        // btnStart.classList.add('start')
-        btnStart.textContent = "Start"
+        // box.appendChild(btnStart);
+        // btnStart.classList.add('btnStyle')
+        // btnStart.textContent = "Start"
+        tabXpiont.push(x);
+        tabYpoint.push(y);
+        
+        
     })
 })
 
-
-
+btnStart.addEventListener('click', () => {
+    
+})
+  
 container.addEventListener('mousedown', (e) => {
+    
+      
     if(canNot == false) return;
     pointOff.style.display = 'inline-block'
 
     const x = e.offsetX
     const y = e.offsetY
+    
 
     if(index == letters.length){
         index = 0
@@ -54,23 +74,46 @@ container.addEventListener('mousedown', (e) => {
     const node = document.createElement('div')
     container.appendChild(node)
     node.classList.add('point');
-    node.setAttribute('id',`${idname++}`)
+    node.setAttribute('id',`item${idname++}`)
     node.textContent = letters[index]
     node.style.left = `${x}px`;
     node.style.top =  `${y}px`;
     index++ 
-    console.log(pointOff.style.display);
+    tabX.push(x);
+    tabY.push(y);
+    
+ 
+})
+start.addEventListener("click", () => {
+    let a = tabX[index-1];
+    let b = tabY[index-1];
+    let c = tabXpiont[index-1];
+    let d = tabYpoint[index-1];
+
+    console.log(a, b);
+        
+    const dis = Math.sqrt( a*c + b*d );
+    console.log(dis);
+    console.log(dis/2);
+
 })
 
-
-
 btn.addEventListener('click', () => {
+    tabX = [];
+    tabY = [];
+    tabXpiont = [];
+    tabYpoint = [];
     container.textContent = ''
     index = 0;
     idname = 1;
+    start.style.display = 'none'
     pointOff.style.display = 'inline-block'
     canNot = true
-    box.removeChild(btnStart)
-    pointOff.style.background = ''
+    
+    pointOff.style.background = '';
+    flag = true
 })
 
+
+
+        

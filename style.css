@@ -41,7 +41,7 @@ body{
     transition: 0.3s;
     margin: 0 auto;
     top: 10%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50% -50%);
 }
 
@@ -50,6 +50,9 @@ body{
     background: rgb(233, 160, 24);
     color: black;
     transition: 0.5s;
+}
+.start{
+    display: none;
 }
 /* .point-off{
     display: none;
