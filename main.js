@@ -3,8 +3,9 @@ const container = document.querySelector('.container');
 const pointOff = document.querySelector('.point-off');
 const btn = document.querySelector('.btn');
 const start = document.querySelector('.start');
-const btnStart = document.createElement('button');
 const btnStop = document.querySelector('.stop');
+
+
 // const div = document.querySelector('.point');
 
 
@@ -20,7 +21,11 @@ let tabX = [];
 let tabY = [];
 let tabXpiont = [];
 let tabYpoint = [];
+let nextPointX = [];
+let nextPointY = [];
 let items = [];
+let newPoint;
+
 
 pointOff.addEventListener('click', () => {
     pointOff.style.background = 'rgb(233, 160, 24)'
@@ -38,21 +43,15 @@ pointOff.addEventListener('click', () => {
         container.appendChild(startPoint);
         startPoint.classList.add('point');
         startPoint.setAttribute('id',`${inStPo}`);
-        startPoint.textContent = 'First point'
         startPoint.style.left = `${x}px`;
         startPoint.style.top =  `${y}px`;
         inStPo++
         tabXpiont.push(x);
-        tabYpoint.push(y);
-        console.log(x, y);
-        
-        
+        tabYpoint.push(y);  
     })
 })
 
-btnStart.addEventListener('click', () => {
-    
-})
+
   
 container.addEventListener('mousedown', (e) => {
     
@@ -78,24 +77,46 @@ container.addEventListener('mousedown', (e) => {
     index++ 
     tabX.push(x);
     tabY.push(y);
-    console.log(x, y);
 })
-start.addEventListener("click", () => {
-    let a = tabX[index-1];
-    let b = tabY[index-1];
-    let c = tabXpiont[index-1];
-    let d = tabYpoint[index-1];  
-    const disX = (a+c)/2;
-    const disY = (b+d)/2;
-    const divCen = document.createElement('div');
-    container.appendChild(divCen);
-    divCen.classList.add('point');
-    divCen.style.left = `${disX}px`;
-    divCen.style.top = `${disY}px`;
-    console.log(disX, disY);
+start.addEventListener("click", (e) => {
+    newPoint = setInterval(() => {
+            let a = tabX[index-1];
+            let b = tabY[index-1];
+            let c = tabXpiont[index-1];
+            let d = tabYpoint[index-1]; 
+            const div = container.lastElementChild;
+        for(let i = 0; i < 5; i++){
+             
+            const disX = (a+c)/2;
+            const disY = (b+d)/2;
+            div.style.left = disX;
+            div.style.top = disY;
+            const divCentral = document.createElement('div');
+            container.appendChild(divCentral);
+            divCentral.classList.add('point');
+            divCentral.style.left = `${disX}px`;
+            divCentral.style.top = `${disY}px`;
+            nextPointX.push(disX/2);
+            nextPointY.push(disY/2);
+
+        }
+            
+        let x = e.offsetX;
+        let y = e.offsetY;
+
+        
+        console.log(nextPointX, nextPointY);
+        // console.log(disX, disY);console.log(div);
+        // console.log(tabX, tabY);
+        // console.log(tabXpiont, tabYpoint);
+        // console.log(divX, divY);
+        // index++
+    }, 5000);
 })
 
+
 btn.addEventListener('click', () => {
+    clearInterval(newPoint)
     tabX = [];
     tabY = [];
     tabXpiont = [];
